@@ -1,40 +1,34 @@
 
 -- Question one
 -- Achieving First Normal Forms
-CREATE TABLE orders( -- creating orders table
-    OrdersID INT PRIMARY KEY ,
-    CustomerName VARCHAR (255)
-);
-CREATE TABLE products( -- creating products table
-    productID INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE productDetails( -- creating product details tables
+    OrdersID INT,
+    CustomerName VARCHAR (100),
     product VARCHAR (100)
 );
--- Inserting values into the created tables
-INSERT INTO orders(OrdersID,CustomerName)
+
+-- Inserting values into the created table
+INSERT INTO productDetails(OrdersID,CustomerName)
 VALUES
-(101,'John Doe'),
-(102,'Jane Smith'),
-(103,'Emily Clark');
-INSERT INTO products(product)
-VALUES
-('Laptop'),
-('Mouse'),
-('Tablet'),
-('Keyboard'),
-('Mouse');
+(101,'John Doe','Laptop'),
+(101,'John Doe','Mouse'),
+(102,'Jane Smith','Tablet'),
+(102,'Jane Smith','Keyboard'),
+(102,'Jane Smith','Mouse'),
+(103,'Emily Clark','Phone');
 
 -- Queston 2
 -- Second Normal Forms
 CREATE TABLE orders(--Creating the first table(orders)
     OrdersID INT PRIMARY KEY ,
-    CustomerName VARCHAR (255)
+    CustomerName VARCHAR (100)
 );
 CREATE TABLE products( -- Creating the second table(products)
-    productID INT PRIMARY KEY AUTO_INCREMENT,
     OrdersID INT,
     Product VARCHAR (100),
     Quantity INT,
-    FOREIGN KEY (OrdersID) REFERENCES products (OrdersID) 
+    PRIMARY KEY (OrdersID,product)
+    FOREIGN KEY (OrdersID) REFERENCES orders(OrdersID) 
 );
 -- Inserting values into the tables
 INSERT INTO orders(OrdersID,CustomerName)
